@@ -1,7 +1,7 @@
 const axios = require('axios')
 
-const spoonAPI = axios.create({
-    baseURL: 'https://api.spoonacular.com/recipes'
-});
+const instance = axios.create({
+    baseURL: 'https://api.spoonacular.com/'
+})
 
-module.exports = spoonAPI
+module.exports = instance
