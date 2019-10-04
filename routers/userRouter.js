@@ -16,6 +16,7 @@ function middleLogin(req,res,next){
 }
 
 router.get('/', middleLogin, UserController.list)
+router.post('/login', UserController.login)
 router.post('/googleSignin', UserController.googleSignin)
 router.get('/googleRegister',UserController.googleRegister)
 

@@ -23,8 +23,9 @@ class RecipeController {
         googleAPI.get(`?key=${googleAPIKey}&cx=${googleCSEId}&q=${req.body.recipe}`)
         .then(({data}) => {
             let images = []
-            console.log(data)
+            // console.log('>>>>>>>>>>>>>>>>>>>>',data, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
             data.items.forEach(item => {
+                // console.log('>>>>>>>>>>>',item.pagemap, '<<<<<<<<<<<<<')
                 images.push(item.pagemap.cse_image[0].src)
             })
             res.status(200).json({images_src: images})
@@ -34,7 +35,7 @@ class RecipeController {
   
   static youtubeVideos(req, res, next){
         const search = req.params.search || 'yummy'
-        youtubeAPI.get(`/search?part=id&maxResults=5&order=relevance&key=AIzaSyCC6a2hTjF8fPEGumystQ5LxZGVUGFntiU&q=${search}`)
+        youtubeAPI.get(`/search?part=id&maxResults=5&order=relevance&key=${process.env.YOUTUBE_API_KEY}&q=${search}`)
             .then(({data})=>{
                 res.status(200).json(data)
             })
@@ -44,11 +45,12 @@ class RecipeController {
 
     static recipeId(req, res, next){
         const id = req.params.id
-        spoonAPI.get(`/${id}/information?apiKey=f3207c5da10e4239b71a095a0bdfef33`)
+        spoonAPI.get(`/recipes/${id}/information?apiKey=${spoonAPIKey}`)
             .then(({data})=>{
                 res.status(200).json(data)
             })
             .catch(next)
+}
 }
 
 module.exports = RecipeController
