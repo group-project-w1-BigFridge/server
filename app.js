@@ -6,6 +6,7 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const router = require('./routers/index')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -19,9 +20,11 @@ app.use(morgan('tiny'))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-app.get('/', (req,res) => {
-  res.status(200).json({status:'connected'})
-})
+app.use('/', router)
+
+// app.get('/', (req,res) => {
+//   res.status(200).json({status:'connected'})
+// })
 
 app.listen(port, () => {
   console.log('App listen on port ' + port)
