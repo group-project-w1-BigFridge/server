@@ -6,6 +6,9 @@ const googleCSEId = process.env.GOOGLE_CSE_ID
 
 class RecipeController {
     static find(req, res, next) {
+        if(!req.body.ingredients) {
+            throw {status: 400, message: 'Please fill the form'}
+        }
         let ingredients = req.body.ingredients.split(',').join(',+')
         spoonAPI.get(`recipes/findByIngredients?ingredients=${ingredients}&apiKey=${spoonAPIKey}`)
         .then(({data}) => {
