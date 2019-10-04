@@ -1,10 +1,9 @@
-const router = require('express').Router()
+const express = require('express')
+const router = express.Router()
 const UserRouter = require('../routers/userRouter')
-
-router.get('/', (req,res) => {
-  res.json({message:"Hello World!"})
-})
+const recipeRouter = require('./recipeRouter')
 
 router.use('/users', UserRouter)
+router.use('/recipes', recipeRouter)
 
 module.exports = router

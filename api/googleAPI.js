@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const instance = axios.create({
-    baseURL: 'https://api.spoonacular.com/'
+    baseURL: 'https://www.googleapis.com/customsearch/v1'
 })
 
 module.exports = instance
