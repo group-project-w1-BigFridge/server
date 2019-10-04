@@ -3,6 +3,8 @@ const spoonAPIKey = process.env.SPOON_API_KEY
 const googleAPI = require('../api/googleAPI')
 const googleAPIKey = process.env.GOOGLE_API_KEY
 const googleCSEId = process.env.GOOGLE_CSE_ID
+const youtubeAPI = require('../api/youtubeAPI')
+
 
 class RecipeController {
     static find(req, res, next) {
@@ -29,6 +31,24 @@ class RecipeController {
         }) 
         .catch(next)
     }
+  
+  static youtubeVideos(req, res, next){
+        const search = req.params.search || 'yummy'
+        youtubeAPI.get(`/search?part=id&maxResults=5&order=relevance&key=AIzaSyCC6a2hTjF8fPEGumystQ5LxZGVUGFntiU&q=${search}`)
+            .then(({data})=>{
+                res.status(200).json(data)
+            })
+            .catch(next)
+    }
+
+
+    static recipeId(req, res, next){
+        const id = req.params.id
+        spoonAPI.get(`/${id}/information?apiKey=f3207c5da10e4239b71a095a0bdfef33`)
+            .then(({data})=>{
+                res.status(200).json(data)
+            })
+            .catch(next)
 }
 
 module.exports = RecipeController
