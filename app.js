@@ -22,9 +22,6 @@ app.use(cors())
 app.use(morgan('tiny'))
 
 app.use('/', routers)
-app.get('/', (req,res) => {
-  res.status(200).json({status:'connected'})
-})
 
 app.use(errorHandler)
 app.listen(port, () => {
