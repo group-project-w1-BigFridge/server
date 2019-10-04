@@ -16,10 +16,10 @@ mongoose.connect(process.env.MONGOOSE_URL, {useNewUrlParser:true,useUnifiedTopol
 .then(()=>{console.log('Database connected')})
 .catch(err => {console.log(err)})
 
-app.use(cors())
-app.use(morgan('tiny'))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(cors())
+app.use(morgan('tiny'))
 
 app.use('/', routers)
 app.get('/', (req,res) => {
