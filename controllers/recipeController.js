@@ -5,13 +5,11 @@ class RecipeController{
 
     static youtubeVideos(req, res, next){
         const search = req.params.search || 'yummy'
-        youtubeAPI.get(`/search?part=id&maxResults=5&order=relevance&key=AIzaSyCWEEohf9AW6nbxt5K21CbY4UqW0hPZjm4&q=${search}`)
+        youtubeAPI.get(`/search?part=id&maxResults=5&order=relevance&key=AIzaSyCC6a2hTjF8fPEGumystQ5LxZGVUGFntiU&q=${search}`)
             .then(({data})=>{
                 res.status(200).json(data)
             })
             .catch(err=>{
-                console.log(123);
-                
                 res.status(500).json(err)
             })
     }
